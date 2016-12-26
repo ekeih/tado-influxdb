@@ -109,14 +109,9 @@ if __name__ == '__main__':
     tado.refreshAuth()
     measurements = []
     for id, name in tado_zones.items():
-      zone = tado.getZone(id)
       result           = { "measurement": influxdb_measurement }
       result["tags"]   = { "room": name }
-      result["fields"] = { "temperature"        : zone['current_temperature'],
-                           "wanted_temperature" : zone['wanted_temperature'],
-                           "humidity"           : zone['humidity'],
-                           "heating_power"      : zone['heating_power']
-                         }
+      result["fields"] = tado.getZone(id)
       print(result)
       measurements.append(result)
     influxdb_client.write_points(measurements)
