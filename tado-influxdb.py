@@ -96,7 +96,7 @@ class Tado:
     if state['setting']['power'] == 'ON':
       wanted_temperature = float(state['setting']['temperature']['celsius'])
     else:
-      wanted_temperature = 0.0
+      wanted_temperature = current_temperature
     weather = self._getWeather()
     outside_temperature = float(weather['outside_temperature'])
     solar_intensity = weather['solar_intensity']
