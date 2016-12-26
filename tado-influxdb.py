@@ -81,9 +81,12 @@ class Tado:
   def getZone(self, zone):
     state = self._getState(zone)
     current_temperature = float(state['sensorDataPoints']['insideTemperature']['celsius'])
-    wanted_temperature  = float(state['setting']['temperature']['celsius'])
     humidity            = float(state['sensorDataPoints']['humidity']['percentage'])
     heating_power       = float(state['activityDataPoints']['heatingPower']['percentage'])
+    if state['setting']['power'] == 'ON':
+      wanted_temperature = float(state['setting']['temperature']['celsius'])
+    else:
+      wanted_temperature = 0.0
     return { 'current_temperature' : current_temperature,
              'wanted_temperature'  : wanted_temperature,
              'humidity'            : humidity,
