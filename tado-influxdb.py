@@ -20,13 +20,13 @@ influxdb_measurement = 'tado'
 ### End Configuration ###
 
 class Tado:
-  username = ''
-  password = ''
-  headers  = { 'Referer' : 'https://my.tado.com/' }
-  api      = 'https://my.tado.com/api/v2/homes'
-  access_token = ''
+  username       = ''
+  password       = ''
+  headers        = { 'Referer' : 'https://my.tado.com/' }
+  api            = 'https://my.tado.com/api/v2/homes'
+  access_token   = ''
   access_headers = headers
-  refresh_token = ''
+  refresh_token  = ''
 
 
   def __init__(self, username, password):
@@ -37,11 +37,11 @@ class Tado:
 
   def _login(self):
     url='https://my.tado.com/oauth/token'
-    data = { 'client_id' : 'tado-webapp',
+    data = { 'client_id'  : 'tado-webapp',
              'grant_type' : 'password',
-             'password' : self.password,
-             'scope' : 'home.user',
-             'username' : self.username }
+             'password'   : self.password,
+             'scope'      : 'home.user',
+             'username'   : self.username }
     request = requests.post(url, data=data, headers=self.access_headers)
     response = request.json()
     self.access_token = response['access_token']
@@ -67,10 +67,10 @@ class Tado:
 
   def refreshAuth(self):
     url='https://my.tado.com/oauth/token'
-    data = { 'client_id' : 'tado-webapp',
-             'grant_type' : 'refresh_token',
+    data = { 'client_id'     : 'tado-webapp',
+             'grant_type'    : 'refresh_token',
              'refresh_token' : self.refresh_token,
-             'scope' : 'home.user'
+             'scope'         : 'home.user'
            }
     request = requests.post(url, data=data, headers=self.headers)
     response = request.json()
