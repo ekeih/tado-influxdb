@@ -97,7 +97,12 @@ class Tado:
       wanted_temperature = float(state['setting']['temperature']['celsius'])
     else:
       wanted_temperature = 0.0
-    return { 'current_temperature' : current_temperature,
+    weather = self._getWeather()
+    outside_temperature = float(weather['outside_temperature'])
+    solar_intensity = weather['solar_intensity']
+    return { 'outside_temperature' : outside_temperature,
+             'solar_intensity'     : solar_intensity,
+             'current_temperature' : current_temperature,
              'wanted_temperature'  : wanted_temperature,
              'humidity'            : humidity,
              'heating_power'       : heating_power
