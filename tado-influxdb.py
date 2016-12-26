@@ -65,6 +65,13 @@ class Tado:
     data = self._apiCall(cmd)
     return data
 
+  def _getWeather(self):
+    cmd = 'weather'
+    data = self._apiCall(cmd)
+    return { 'outside_temperature' : data['outsideTemperature']['celsius'],
+             'solar_intensity'     : data['solarIntensity']['percentage']
+           }
+
   def refreshAuth(self):
     url='https://my.tado.com/oauth/token'
     data = { 'client_id'     : 'tado-webapp',
