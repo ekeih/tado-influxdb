@@ -84,10 +84,10 @@ class Tado:
     wanted_temperature  = float(state['setting']['temperature']['celsius'])
     humidity            = float(state['sensorDataPoints']['humidity']['percentage'])
     heating_power       = float(state['activityDataPoints']['heatingPower']['percentage'])
-    return { 'current_temperature': current_temperature,
-             'wanted_temperature' : wanted_temperature,
-             'humidity'           : humidity,
-             'heating_power'      : heating_power
+    return { 'current_temperature' : current_temperature,
+             'wanted_temperature'  : wanted_temperature,
+             'humidity'            : humidity,
+             'heating_power'       : heating_power
            }
 
 if __name__ == '__main__':
@@ -102,10 +102,10 @@ if __name__ == '__main__':
       zone = tado.getZone(id)
       result           = { "measurement": influxdb_measurement }
       result["tags"]   = { "room": name }
-      result["fields"] = { "temperature": zone['current_temperature'],
-                           "wanted_temperature": zone['wanted_temperature'],
-                           "humidity": zone['humidity'],
-                           "heating_power": zone['heating_power']
+      result["fields"] = { "temperature"        : zone['current_temperature'],
+                           "wanted_temperature" : zone['wanted_temperature'],
+                           "humidity"           : zone['humidity'],
+                           "heating_power"      : zone['heating_power']
                          }
       print(result)
       measurements.append(result)
