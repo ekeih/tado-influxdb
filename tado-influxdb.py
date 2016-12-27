@@ -101,7 +101,7 @@ class Tado:
       wanted_temperature = current_temperature
     weather = self._getWeather()
     outside_temperature = float(weather['outside_temperature'])
-    solar_intensity = weather['solar_intensity']
+    solar_intensity = float(weather['solar_intensity'])
     return { 'outside_temperature' : outside_temperature,
              'solar_intensity'     : solar_intensity,
              'current_temperature' : current_temperature,
