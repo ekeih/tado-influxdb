@@ -27,8 +27,9 @@ class Tado:
   access_token   = ''
   access_headers = headers
   refresh_token  = ''
-  modes          = { 'HOME' : 0,
-                     'AWAY' : 1
+  modes          = { 'HOME'  : 0,
+                     'AWAY'  : 1,
+                     'SLEEP' : 2
                    }
 
 
