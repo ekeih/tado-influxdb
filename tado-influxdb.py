@@ -93,7 +93,7 @@ class Tado:
     state = self._getState(zone)
     current_temperature = float(state['sensorDataPoints']['insideTemperature']['celsius'])
     humidity            = float(state['sensorDataPoints']['humidity']['percentage'])
-    heating_power       = state['activityDataPoints']['heatingPower']['percentage']
+    heating_power       = float(state['activityDataPoints']['heatingPower']['percentage'])
     tado_mode           = state['tadoMode']
     if state['setting']['power'] == 'ON':
       wanted_temperature = float(state['setting']['temperature']['celsius'])
