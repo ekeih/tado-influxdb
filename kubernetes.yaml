@@ -28,7 +28,7 @@ data:
     }
     influxdb_database    = 'tado'
     influxdb_measurement = 'tado'
-    influxdb_host = 'localhost'
+    influxdb_host = 'CHANGEME'
     influxdb_port = 8086
 ---
 apiVersion: apps/v1
