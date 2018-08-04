@@ -1,2 +1,4 @@
+datetime
+fake-useragent
 requests
 influxdb
