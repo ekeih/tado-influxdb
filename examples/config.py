@@ -1,5 +1,5 @@
-tado_user = 'TADO_ACCOUNT'
-tado_pass = 'TADO_PASSWORD'
+tado_user = 'account@tado.com'
+tado_pass = 'securepassword'
 
 tado_zones = {
   1: "Bedroom",

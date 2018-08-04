@@ -124,7 +124,7 @@ if __name__ == '__main__':
       result           = { "measurement": config.influxdb_measurement }
       result["tags"]   = { "room": name }
       result["fields"] = tado.getZone(id)
-      print(result)
+      print('[%s] %s' % (datetime.datetime.now().isoformat(), result))
       measurements.append(result)
     influxdb_client.write_points(measurements)
     time.sleep(15)
