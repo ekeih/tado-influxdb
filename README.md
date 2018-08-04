@@ -10,7 +10,7 @@ Please be aware that this script is work in progress, does no error handling
 and will probably crash ;-) I will fix this soon...ish!
 
 ## Running on Docker / Kubernetes
-This repo includes a Dockerfile (build to cbeneke/tado-influx:latest) and a
+This repo includes a Dockerfile (builds to cbeneke/tado-influxdb:latest) and a
 Kubernetes Deployment yaml. If you want to run on Kubernetes, change the
 CHANGEME options in the Deployment and configure your influx-service in the
 tado-influx-config configmap.
