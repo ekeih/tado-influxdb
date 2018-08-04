@@ -1,0 +1,12 @@
+tado_user = 'TADO_ACCOUNT'
+tado_pass = 'TADO_PASSWORD'
+
+tado_zones = {
+  1: "Bedroom",
+  2: "Livingroom",
+}
+
+influxdb_host = 'localhost'
+influxdb_port = 8086
+influxdb_database    = 'tado'
+influxdb_measurement = 'tado'
