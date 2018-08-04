@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tado-influxdb
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: tado-influxdb-credentials
+data:
+  account: CHANGEME
+  password: CHANGEME
+type: Opaque
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tado-influxdb-config
+  namespace: tado-influxdb
+data:
+  config.py: |
+    import os
+    tado_user = os.environ['TADO_ACCOUNT'].rstrip()
+    tado_pass = os.environ['TADO_PASSWORD'].rstrip()
+    tado_zones = {
+      1: "Bedroom",
+      2: "Livingroom",
+    }
+    influxdb_database    = 'tado'
+    influxdb_measurement = 'tado'
+    influxdb_host = 'localhost'
+    influxdb_port = 8086
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tado-influxdb
+  namespace: tado-influxdb
+  labels:
+    app: tado-influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tado-influxdb
+  template:
+    metadata:
+      labels:
+        app: tado-influxdb
+    spec:
+      containers:
+      - name: tado-influxdb
+        image: cbeneke/tado-influxdb:latest
+        env:
+        - name: TADO_ACCOUNT
+          valueFrom:
+            secretKeyRef:
+              name: tado-influxdb-credentials
+              key: account
+        - name: TADO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: tado-influxdb-credentials
+              key: password
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config.py
+          subPath: config.py
+      volumes:
+      - name: config-volume
+        configMap:
+          name: tado-influxdb-config
